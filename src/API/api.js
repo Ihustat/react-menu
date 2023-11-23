@@ -5,3 +5,9 @@ export async function getAllCategories() {
 
   return await response.json();
 }
+
+export async function getMealsByCategory(categoryName) {
+  const response = await fetch(`${API_URL}filter.php?c=${categoryName}`);
+
+  return await response.json();
+}

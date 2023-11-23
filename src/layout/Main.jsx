@@ -1,18 +1,26 @@
 import React, { useEffect, useState } from 'react';
-
-import { getAllCategories } from '../API/api';
-import { CategoriesList } from '../components/CategoriesList';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { CategoriesPage } from '../pages/CategoriesPage';
+import { CategoryPage } from '../pages/CategoryPage';
 
 export function Main() {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    getAllCategories().then((data) => setCategories(data.categories));
-  }, []);
-
+  const router = createBrowserRouter([
+    {
+      path: '/',
+      element: <CategoriesPage />,
+    },
+    {
+      path: '/category/:categoryName',
+      element: <CategoryPage />,
+    },
+    {
+      path: '/meal/:mealID',
+      element: <CategoryPage />,
+    },
+  ]);
   return (
     <main className='content container'>
-      <CategoriesList categories={categories} />
+      <RouterProvider router={router} />
     </main>
   );
 }
