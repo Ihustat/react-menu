@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { CategoriesPage } from '../pages/CategoriesPage';
 import { CategoryPage } from '../pages/CategoryPage';
+import { Meal } from '../pages/Meal';
 
 export function Main() {
   const router = createBrowserRouter([
@@ -14,8 +15,8 @@ export function Main() {
       element: <CategoryPage />,
     },
     {
-      path: '/meal/:mealID',
-      element: <CategoryPage />,
+      path: '/meal/:mealId',
+      element: <Meal />,
     },
   ]);
   return (
