@@ -1,0 +1,9 @@
+.breadcrumbsList {
+  display: flex;
+  gap: 3px;
+}
+
+.breadcrumbsItem:not(:last-child) {
+  opacity: 0.7;
+  cursor: pointer;
+}

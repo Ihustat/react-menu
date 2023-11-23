@@ -1,4 +1,6 @@
+import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { BreadcrumbsContext } from '../context/BreadcrumbsContext';
 
 export function CategoriesItem({
   idCategory: id,
@@ -7,6 +9,8 @@ export function CategoriesItem({
   strCategoryDescription: descr,
 }) {
   const router = useNavigate();
+  const { setCategory } = useContext(BreadcrumbsContext);
+
   return (
     <div className='card'>
       <div className='card-image'>
@@ -19,7 +23,10 @@ export function CategoriesItem({
       <div className='card-action'>
         <button
           className='btn orange lighten-2'
-          onClick={() => router(`/category/${title}`)}
+          onClick={() => {
+            router(`/category/${title}`);
+            setCategory(title);
+          }}
         >
           Show Category
         </button>
