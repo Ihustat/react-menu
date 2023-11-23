@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import classes from './Breadcrumbs.module.css';
 import { useContext } from 'react';
-import { BreadcrumbsContext } from '../../../../context/BreadcrumbsContext';
+import { BreadcrumbsContext } from '../../../context/BreadcrumbsContext';
 
 export function Breadcrumbs({ arr }) {
   const { category } = useContext(BreadcrumbsContext);

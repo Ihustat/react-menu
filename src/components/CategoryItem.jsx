@@ -1,6 +1,7 @@
 import { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BreadcrumbsContext } from '../context/BreadcrumbsContext';
+import { MyButton } from './UI/button/MyButton';
 
 export function CategoryItem({
   idMeal: id,
@@ -19,15 +20,14 @@ export function CategoryItem({
         <span className='card-title'>{title}</span>
       </div>
       <div className='card-action'>
-        <button
-          className='btn orange lighten-2'
+        <MyButton
           onClick={() => {
             router(`/meal/${id}`);
             setMeal(title);
           }}
         >
           Show Meal
-        </button>
+        </MyButton>
       </div>
     </div>
   );

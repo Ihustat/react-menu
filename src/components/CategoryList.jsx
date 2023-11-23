@@ -1,8 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { CategoryItem } from './CategoryItem';
 import { Preloader } from './UI/preloader/Preloader';
-import { Breadcrumbs } from './UI/preloader/breadcrumbs/Breadcrumbs';
+import { Breadcrumbs } from './UI/breadcrumbs/Breadcrumbs';
 import { BreadcrumbsContext } from '../context/BreadcrumbsContext';
+import { BackBtn } from './UI/button/BackBtn';
 
 export function CategoryList({ categoryList = [] }) {
   const { breadcrumbs, setBreadcrumbs, category } =
@@ -24,6 +25,7 @@ export function CategoryList({ categoryList = [] }) {
               <CategoryItem key={cat.idMeal} {...cat} />
             ))}
           </div>
+          <BackBtn />
         </>
       )}
     </>
