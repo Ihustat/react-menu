@@ -5,12 +5,11 @@ import { Breadcrumbs } from './UI/breadcrumbs/Breadcrumbs';
 import { BreadcrumbsContext } from '../context/BreadcrumbsContext';
 import { BackBtn } from './UI/button/BackBtn';
 
-export function CategoryList({ categoryList = [] }) {
-  const { breadcrumbs, setBreadcrumbs, category } =
-    useContext(BreadcrumbsContext);
+export function CategoryList({ categoryList = [], categoryName }) {
+  const { breadcrumbs, setBreadcrumbs } = useContext(BreadcrumbsContext);
 
   useEffect(() => {
-    setBreadcrumbs(['All categories', category]);
+    setBreadcrumbs(['All categories', categoryName]);
   }, []);
 
   return (

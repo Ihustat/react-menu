@@ -25,3 +25,20 @@ nav {
 .progress {
   width: 100%;
 }
+
+.meal__img {
+  max-width: 100%;
+}
+
+.meal__area {
+  font-weight: bold;
+}
+
+.meal__descr {
+  margin-top: 15px;
+}
+
+select {
+  display: block;
+  cursor: pointer;
+}
