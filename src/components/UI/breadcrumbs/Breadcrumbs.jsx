@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { BreadcrumbsContext } from '../../../context/BreadcrumbsContext';
 
 export function Breadcrumbs({ arr }) {
-  const { category } = useContext(BreadcrumbsContext);
+  const { category, area } = useContext(BreadcrumbsContext);
 
   return (
     <ul className={classes.breadcrumbsList}>
@@ -15,7 +15,11 @@ export function Breadcrumbs({ arr }) {
           ) : i === arr.length - 1 ? (
             item
           ) : (
-            <Link to={`/category/${category}`}>{item}/ </Link>
+            <Link
+              to={`${category ? `/category/${category}` : `/country/${area}`}`}
+            >
+              {item}/{' '}
+            </Link>
           )}
         </li>
       ))}

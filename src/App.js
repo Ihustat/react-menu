@@ -8,6 +8,7 @@ function App() {
   const [breadcrumbs, setBreadcrumbs] = useState([]);
   const [category, setCategory] = useState('');
   const [meal, setMeal] = useState('');
+  const [area, setArea] = useState('');
 
   return (
     <BreadcrumbsContext.Provider
@@ -18,6 +19,8 @@ function App() {
         setCategory,
         meal,
         setMeal,
+        area,
+        setArea,
       }}
     >
       <div className='App'>

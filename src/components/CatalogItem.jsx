@@ -13,8 +13,8 @@ export function CatalogItem({
   categoryName,
 }) {
   const router = useNavigate();
-  const { setCategory } = useContext(BreadcrumbsContext);
-  const { setMeal } = useContext(BreadcrumbsContext);
+  const { setCategory, setMeal, setArea, area } =
+    useContext(BreadcrumbsContext);
 
   return (
     <div className='card'>
@@ -32,8 +32,15 @@ export function CatalogItem({
         {strCategory ? (
           <MyButton
             onClick={() => {
-              router(`/category/${strCategory}`);
-              setCategory(strCategory);
+              if (area) {
+                router(`/country/${area}`);
+                setArea(area);
+                setCategory('');
+              } else {
+                router(`/category/${strCategory}`);
+                setCategory(strCategory);
+                setArea('');
+              }
             }}
           >
             Show Category

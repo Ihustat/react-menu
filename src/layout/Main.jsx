@@ -4,6 +4,7 @@ import { CatalogMain } from '../pages/CatalogMain';
 import { FilteredCatalog } from '../pages/FilteredCatalog';
 import { Meal } from '../pages/Meal';
 import { ErrorPage } from '../pages/ErrorPage';
+import { CountryPage } from '../pages/CountryPage';
 
 export function Main() {
   const router = createBrowserRouter([
@@ -15,6 +16,11 @@ export function Main() {
     {
       path: '/category/:categoryName',
       element: <FilteredCatalog />,
+      errorElement: <ErrorPage />,
+    },
+    {
+      path: '/country/:countryName',
+      element: <CountryPage />,
       errorElement: <ErrorPage />,
     },
     {
