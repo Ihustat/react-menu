@@ -10,7 +10,6 @@ export function CatalogItem({
   strMealThumb,
   strCategoryDescription: descr,
   idMeal: id,
-  categoryName,
 }) {
   const router = useNavigate();
   const { setCategory, setMeal, setArea, area } =
