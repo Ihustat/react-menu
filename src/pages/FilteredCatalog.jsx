@@ -5,7 +5,6 @@ import { getMealsByCategory } from '../API/api';
 import { CatalogList } from '../components/CatalogList';
 import { Preloader } from '../components/UI/preloader/Preloader';
 import { Pagination } from '../components/UI/pagination/Pagination';
-import { MyRadio } from '../components/UI/radio/MyRadio';
 
 export function FilteredCatalog() {
   const { categoryName } = useParams();
@@ -31,11 +30,6 @@ export function FilteredCatalog() {
   }, [showCounter, currentPage]);
   return (
     <>
-      <MyRadio
-        showCounter={showCounter}
-        setShowCounter={setShowCounter}
-        setCurrentPage={setCurrentPage}
-      />
       {category.length === 0 ? (
         <Preloader />
       ) : (

@@ -4,7 +4,6 @@ import { Preloader } from '../components/UI/preloader/Preloader';
 import { getMealsByArea } from '../API/api';
 import { useParams } from 'react-router-dom';
 import { Pagination } from '../components/UI/pagination/Pagination';
-import { MyRadio } from '../components/UI/radio/MyRadio';
 
 export function CountryPage() {
   const [areaData, setAreaData] = useState([]);
@@ -32,11 +31,6 @@ export function CountryPage() {
 
   return (
     <>
-      <MyRadio
-        showCounter={showCounter}
-        setShowCounter={setShowCounter}
-        setCurrentPage={setCurrentPage}
-      />
       {areaData.length === 0 ? (
         <Preloader />
       ) : (

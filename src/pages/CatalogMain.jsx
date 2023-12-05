@@ -1,20 +1,22 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { getAllCategories, getAllAreas } from '../API/api';
+
 import { CatalogList } from '../components/CatalogList';
+import { MySelect } from '../components/UI/select/MySelect';
 
 import { Search } from '../components/UI/search/Search';
 import { Preloader } from '../components/UI/preloader/Preloader';
-import { MySelect } from '../components/UI/select/MySelect';
+
 import { BreadcrumbsContext } from '../context/BreadcrumbsContext';
 import { Pagination } from '../components/UI/pagination/Pagination';
-import { MyRadio } from '../components/UI/radio/MyRadio';
+
+import { useSelect } from '../hooks/useSelect';
+import { useSearch } from '../hooks/useSearch';
 
 export function CatalogMain() {
   const [catalog, setCatalog] = useState([]);
   const [filteredCatalog, setFilteredCatalog] = useState([]);
-  const [areasName, setAreasName] = useState([]);
-  const [showCounter, setShowCounter] = useState(0);
+  const [showCounter, setShowCounter] = useState('All');
   const [pagesCounter, setPagesCounter] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
 
@@ -22,18 +24,13 @@ export function CatalogMain() {
   const navigate = useNavigate();
   const { setArea, setCategory } = useContext(BreadcrumbsContext);
 
-  function handleSearch(str) {
-    setFilteredCatalog(
-      catalog.filter((cat) =>
-        cat.strCategory.toLowerCase().includes(str.toLowerCase())
-      )
-    );
-
-    navigate({
-      pathname,
-      search: `?search=${str}`,
-    });
-  }
+  const { handleSearch, createFilteredCatalog } = useSearch(
+    setFilteredCatalog,
+    catalog,
+    navigate,
+    pathname,
+    search
+  );
 
   function fetchCountry(countryName) {
     navigate(`/country/${countryName}`);
@@ -41,51 +38,21 @@ export function CatalogMain() {
     setCategory('');
   }
 
+  useSelect(setCatalog, showCounter, setPagesCounter, currentPage);
+
   useEffect(() => {
-    setFilteredCatalog(
-      search
-        ? catalog.filter((cat) =>
-            cat.strCategory
-              .toLowerCase()
-              .includes(search.split('=')[1].toLowerCase())
-          )
-        : catalog
-    );
+    setFilteredCatalog(createFilteredCatalog());
   }, [catalog, search]);
-
-  useEffect(() => {
-    getAllAreas().then((data) => setAreasName(data.meals));
-  }, []);
-
-  useEffect(() => {
-    getAllCategories().then((data) => {
-      if (showCounter) {
-        setPagesCounter(data.categories.length / showCounter);
-        setCatalog(
-          data.categories.slice(
-            showCounter * currentPage,
-            showCounter * currentPage + showCounter
-          )
-        );
-      } else {
-        setCatalog(data.categories);
-      }
-    });
-  }, [showCounter, currentPage]);
 
   return (
     <>
       <Search cb={handleSearch} />
       <MySelect
-        defaultValue={'Show meals by country'}
-        options={areasName}
-        cb={fetchCountry}
+        options={['All', 6, 9]}
+        defaultValue='Show by'
+        cb={setShowCounter}
       />
-      <MyRadio
-        showCounter={showCounter}
-        setShowCounter={setShowCounter}
-        setCurrentPage={setCurrentPage}
-      />
+
       {catalog.length === 0 ? (
         <Preloader />
       ) : (

@@ -31,15 +31,9 @@ export function CatalogItem({
         {strCategory ? (
           <MyButton
             onClick={() => {
-              if (area) {
-                router(`/country/${area}`);
-                setArea(area);
-                setCategory('');
-              } else {
-                router(`/category/${strCategory}`);
-                setCategory(strCategory);
-                setArea('');
-              }
+              router(`/category/${strCategory}`);
+              setCategory(strCategory);
+              setArea('');
             }}
           >
             Show Category
