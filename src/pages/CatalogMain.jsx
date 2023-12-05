@@ -9,7 +9,6 @@ import { MySelect } from '../components/UI/select/MySelect';
 import { Search } from '../components/UI/search/Search';
 import { Preloader } from '../components/UI/preloader/Preloader';
 
-import { BreadcrumbsContext } from '../context/BreadcrumbsContext';
 import { Pagination } from '../components/UI/pagination/Pagination';
 
 import { useSelect } from '../hooks/useSelect';
@@ -24,7 +23,6 @@ export function CatalogMain() {
 
   const { pathname, search } = useLocation();
   const navigate = useNavigate();
-  const { setArea, setCategory } = useContext(BreadcrumbsContext);
 
   const { handleSearch, createFilteredCatalog } = useSearch(
     setFilteredCatalog,
@@ -33,13 +31,8 @@ export function CatalogMain() {
     pathname,
     search
   );
-  const showData = useSelect();
 
-  function fetchCountry(countryName) {
-    navigate(`/country/${countryName}`);
-    setArea(countryName);
-    setCategory('');
-  }
+  const showData = useSelect();
 
   useEffect(() => {
     getAllCategories().then((data) => {
@@ -49,14 +42,16 @@ export function CatalogMain() {
         data.categories
       );
 
-      setCatalog(returnData);
+      setFilteredCatalog(returnData);
       setPagesCounter(pagesCount);
+
+      setCatalog(returnData);
     });
   }, [showCounter, currentPage]);
 
   useEffect(() => {
     setFilteredCatalog(createFilteredCatalog());
-  }, [catalog, search]);
+  }, [filteredCatalog, search]);
 
   return (
     <>
@@ -73,7 +68,11 @@ export function CatalogMain() {
         <CatalogList catalog={filteredCatalog} />
       )}
       {showCounter ? (
-        <Pagination pages={pagesCounter} setCurrentPage={setCurrentPage} />
+        <Pagination
+          pages={pagesCounter}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       ) : null}
     </>
   );

@@ -42,3 +42,9 @@ select {
   display: block;
   cursor: pointer;
 }
+
+.pointed {
+  cursor: pointer;
+  display: block;
+  margin: 10px 0;
+}

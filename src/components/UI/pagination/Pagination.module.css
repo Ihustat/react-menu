@@ -1,0 +1,8 @@
+.pages__container {
+  display: flex;
+  gap: 10px;
+}
+
+.activePage {
+  background-color: #f57c00;
+}

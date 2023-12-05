@@ -1,6 +1,12 @@
+import classes from './MySelect.module.css';
+
 export function MySelect({ options, defaultValue, value, cb }) {
   return (
-    <select value={value} onChange={(e) => cb(e.target.value)}>
+    <select
+      className={classes.mySelect}
+      value={value}
+      onChange={(e) => cb(e.target.value)}
+    >
       <option value='All' disabled>
         {defaultValue}
       </option>
