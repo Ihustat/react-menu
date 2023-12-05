@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { getAllCategories } from '../API/api';
+
 import { CatalogList } from '../components/CatalogList';
 import { MySelect } from '../components/UI/select/MySelect';
 
@@ -31,6 +33,7 @@ export function CatalogMain() {
     pathname,
     search
   );
+  const showData = useSelect();
 
   function fetchCountry(countryName) {
     navigate(`/country/${countryName}`);
@@ -38,7 +41,18 @@ export function CatalogMain() {
     setCategory('');
   }
 
-  useSelect(setCatalog, showCounter, setPagesCounter, currentPage);
+  useEffect(() => {
+    getAllCategories().then((data) => {
+      const { pagesCount, returnData } = showData(
+        showCounter,
+        currentPage,
+        data.categories
+      );
+
+      setCatalog(returnData);
+      setPagesCounter(pagesCount);
+    });
+  }, [showCounter, currentPage]);
 
   useEffect(() => {
     setFilteredCatalog(createFilteredCatalog());
