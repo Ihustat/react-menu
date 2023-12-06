@@ -11,12 +11,16 @@ export function Breadcrumbs({ arr }) {
       {arr.map((item, i) => (
         <li className={classes.breadcrumbsItem} key={item}>
           {i === 0 ? (
-            <Link to='/'>{item}/ </Link>
+            <Link to='/react-menu'>{item}/ </Link>
           ) : i === arr.length - 1 ? (
             item
           ) : (
             <Link
-              to={`${category ? `/category/${category}` : `/country/${area}`}`}
+              to={`${
+                category
+                  ? `/react-menu/category/${category}`
+                  : `/react-menu/country/${area}`
+              }`}
             >
               {item}/{' '}
             </Link>

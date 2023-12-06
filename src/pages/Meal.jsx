@@ -26,11 +26,11 @@ export function Meal() {
 
   function navigateTo(param, paramName) {
     if (param === 'country') {
-      navigate(`/country/${paramName}`);
+      navigate(`/react-menu/country/${paramName}`);
       setArea(paramName);
       setCategory('');
     } else {
-      navigate(`/category/${paramName}`);
+      navigate(`/react-menu/category/${paramName}`);
       setArea('');
       setCategory(paramName);
     }

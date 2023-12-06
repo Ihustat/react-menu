@@ -31,7 +31,7 @@ export function CatalogItem({
         {strCategory ? (
           <MyButton
             onClick={() => {
-              router(`/category/${strCategory}`);
+              router(`/react-menu/category/${strCategory}`);
               setCategory(strCategory);
               setArea('');
             }}
@@ -41,7 +41,7 @@ export function CatalogItem({
         ) : (
           <MyButton
             onClick={() => {
-              router(`/meal/${id}`);
+              router(`/react-menu/meal/${id}`);
               setMeal(strMeal);
             }}
           >
